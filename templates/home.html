@@ -1,0 +1,13 @@
+{% extends "base.html" %}{% block title %}BookNest | Discover Your Next Great Read{% endblock %}
+{% block content %}
+<section class="hero">
+  <div><span class="eyebrow">WELCOME TO BOOKNEST</span><h1>Discover Your<br><span>Next Great Read.</span></h1>
+  <p>Find timeless classics, modern bestsellers and practical books for your next chapter.</p>
+  <a class="btn primary" href="{{ url_for('books') }}">Explore Books →</a></div>
+  <div class="hero-card"><div class="book-stack">📚</div><p>16+ curated titles</p><strong>Read. Learn. Grow.</strong></div>
+</section>
+<section class="section"><div class="section-head"><div><span class="eyebrow">CURATED FOR YOU</span><h2>Featured Books</h2></div><a href="{{ url_for('books') }}">View all →</a></div>
+<div class="book-grid">{% for book in books %}{% include "_book_card.html" %}{% endfor %}</div></section>
+<section class="categories section"><div class="section-head"><div><span class="eyebrow">BROWSE</span><h2>Shop by Category</h2></div></div>
+<div class="category-grid">{% for c in categories %}<a href="{{ url_for('books', category=c['category']) }}" class="category-card"><span>{{ '💻' if c['category']=='Programming' else '💰' if c['category']=='Finance' else '🧠' if c['category']=='Self Help' else '📖' }}</span><strong>{{ c['category'] }}</strong><small>{{ c['count'] }} books</small></a>{% endfor %}</div></section>
+{% endblock %}

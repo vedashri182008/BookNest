@@ -1,0 +1,2 @@
+function toggleNav(){document.getElementById("navMenu")?.classList.toggle("open")}
+document.addEventListener("DOMContentLoaded",()=>{setTimeout(()=>document.querySelectorAll(".flash").forEach(x=>{x.style.transition="opacity .4s";x.style.opacity="0";setTimeout(()=>x.remove(),500)}),4500)})

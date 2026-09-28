@@ -1,0 +1,15 @@
+{% extends "base.html" %}{% block title %}Books | BookNest{% endblock %}
+{% block content %}
+<section class="page-head"><span class="eyebrow">THE COLLECTION</span><h1>Find your next book.</h1><p>Search, filter and sort our curated collection.</p></section>
+<section class="catalog section">
+<form class="filters" method="get">
+<input name="q" value="{{ q }}" placeholder="🔎 Search title, author...">
+<select name="category"><option value="">All categories</option>{% for c in categories %}<option {% if category==c['category'] %}selected{% endif %}>{{ c['category'] }}</option>{% endfor %}</select>
+<select name="sort"><option value="featured" {% if sort=='featured' %}selected{% endif %}>Featured</option><option value="price_low" {% if sort=='price_low' %}selected{% endif %}>Price: Low to High</option><option value="price_high" {% if sort=='price_high' %}selected{% endif %}>Price: High to Low</option><option value="rating" {% if sort=='rating' %}selected{% endif %}>Top Rated</option><option value="name" {% if sort=='name' %}selected{% endif %}>Name A-Z</option></select>
+<input type="number" name="min_price" value="{{ min_price }}" placeholder="Min ₹"><input type="number" name="max_price" value="{{ max_price }}" placeholder="Max ₹">
+<select name="rating"><option value="">Any rating</option><option value="4.5" {% if rating=='4.5' %}selected{% endif %}>4.5+</option><option value="4.0" {% if rating=='4.0' %}selected{% endif %}>4.0+</option></select>
+<button class="btn primary">Apply</button><a class="btn ghost" href="{{ url_for('books') }}">Reset</a>
+</form>
+<div class="results-bar"><strong>{{ books|length }} books</strong></div>
+<div class="book-grid">{% for book in books %}{% include "_book_card.html" %}{% else %}<div class="empty"><h2>No books found</h2><p>Try changing your filters.</p></div>{% endfor %}</div>
+</section>{% endblock %}

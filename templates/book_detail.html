@@ -1,0 +1,11 @@
+{% extends "base.html" %}{% block title %}{{ book['title'] }} | BookNest{% endblock %}
+{% block content %}
+<section class="detail section"><div class="detail-cover"><img src="{{ book['image'] }}" alt="{{ book['title'] }}" onerror="this.src='https://placehold.co/600x850/f1ede5/263238?text=BookNest'"></div>
+<div class="detail-copy"><span class="eyebrow">{{ book['category'] }}</span><h1>{{ book['title'] }}</h1><p class="author">by {{ book['author'] }}</p><div class="rating big">★ {{ book['rating'] }} <span>{{ book['review_count'] }} reviews</span></div>
+<p>{{ book['description'] }}</p><div class="price huge">₹{{ '%.0f'|format(book['price']) }} <del>₹{{ '%.0f'|format(book['original_price']) }}</del></div>
+<div class="stock">{{ 'In stock' if book['stock']>0 else 'Out of stock' }} · {{ book['stock'] }} available</div>
+<div class="detail-actions"><form method="post" action="{{ url_for('add_cart',book_id=book['id']) }}"><button class="btn primary">Add to Cart</button></form><form method="post" action="{{ url_for('wishlist_toggle',book_id=book['id']) }}"><button class="btn ghost">♡ Wishlist</button></form></div>
+<div class="specs"><div><b>Publisher</b><span>{{ book['publisher'] }}</span></div><div><b>Pages</b><span>{{ book['pages'] }}</span></div><div><b>Language</b><span>{{ book['language'] }}</span></div><div><b>ISBN</b><span>{{ book['isbn'] }}</span></div></div>
+</div></section>
+{% if related %}<section class="section"><div class="section-head"><h2>You may also like</h2></div><div class="book-grid">{% for book in related %}{% include "_book_card.html" %}{% endfor %}</div></section>{% endif %}
+{% endblock %}

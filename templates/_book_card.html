@@ -1,0 +1,6 @@
+<article class="book-card">
+<a href="{{ url_for('book_detail',book_id=book['id']) }}" class="cover"><img src="{{ book['image'] }}" alt="{{ book['title'] }} cover" onerror="this.src='https://placehold.co/500x700/f1ede5/263238?text=BookNest'"></a>
+<div class="book-info"><div class="rating">★ {{ book['rating'] }} <span>({{ book['review_count'] }})</span></div>
+<h3><a href="{{ url_for('book_detail',book_id=book['id']) }}">{{ book['title'] }}</a></h3><p>{{ book['author'] }}</p>
+<div class="price">₹{{ '%.0f'|format(book['price']) }} <del>₹{{ '%.0f'|format(book['original_price']) }}</del></div>
+<div class="card-actions"><form method="post" action="{{ url_for('add_cart',book_id=book['id']) }}"><button class="btn primary small">Add to Cart</button></form><form method="post" action="{{ url_for('wishlist_toggle',book_id=book['id']) }}"><button class="icon-btn" title="Wishlist">♡</button></form></div></div></article>
